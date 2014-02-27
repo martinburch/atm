@@ -8,6 +8,7 @@ import json
 from s3 import is_s3_uri, S3
 
 from local import load_local, store_local
+import time
 from datetime import datetime
 
 
@@ -156,7 +157,7 @@ class ATM(object):
 
   def _gen_interval_string(self):
     """Generate a timestamp string that will be used to update the cache at a set interval"""
-    now = int(datetime.now().strftime("%s"))
+    now = int(time.mktime(datetime.now().timetuple()))
     if self.interval:
       return self._round_timestamp_to_interval(now)
     else:
